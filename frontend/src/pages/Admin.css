@@ -1,0 +1,10 @@
+.admin{
+  min-height: 100%;
+  min-width: 100%;
+   display: grid;
+   grid-template-columns:auto 1fr 1fr;
+   grid-template-rows:  auto ;
+   grid-template-areas: "admin-searchbar admin-searchbar admin-searchbar"
+   "admin-sidebar admin-info  admin-info "
+   "admin-sidebar admin-info admin-info";
+}

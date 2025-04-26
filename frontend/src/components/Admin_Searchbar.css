@@ -1,0 +1,7 @@
+.admin-searchbar{
+  display: flex;
+  justify-content: center;
+  grid-area: admin-searchbar;
+  width: 100%;
+  background-color: #FDFAF6;
+}

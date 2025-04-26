@@ -1,0 +1,100 @@
+import Product from "../models/product_schema.mjs";
+import uploadCloud from '../utils/upload-cloudinary.mjs'
+import fs from 'fs';
+import cloudinary from "../config/cloudinary.mjs";
+
+//pagination
+async function fetchProduct(req,res) {
+  try {
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) ||1;
+    const skip = (page-1)*limit;
+    const sortOrder = req.query.sort ==='asc'? 1:-1;
+    const sortFilter = req.query.sortFilter || 'createdAt';
+    const totalProduct = await Product.countDocuments();
+    const totalpages= Math.ceil(totalProduct/limit)
+    const sortObj={};
+    sortObj[sortFilter]= sortOrder;
+
+    const products = await Product.find().sort(sortObj).skip(skip).limit(limit);
+    res.status(200).json({success:true,message:`Successfully retrieved products`,currentPage:page,totalpages:totalpages,products:products})
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({success:false,message:`Server Error`})
+  }
+};
+
+
+
+async function createProduct(req,res){
+
+  try {
+    const {name,category,price,inStock,stock}= req.body;
+    if(!req.file){
+      return res.status(404).json({success:false,message:`No file path found`})
+    }
+    const {publicId,url}= await uploadCloud(req.file.path)
+    const product = await Product.findOne({name:name});
+    if(product){
+      return res.status(400).json({success:true,message:`Product name already exists!`})
+    }
+    const newProduct = new Product({
+      name:name,
+      category:category,
+      price:price,
+      inStock:inStock,
+      stock:stock,
+      publicId:publicId,
+      url:url,
+    });
+    await newProduct.save()
+    fs.unlinkSync(req.file.path)
+    res.status(201).json({success:true,message:`Product successfully created!`,product:{...newProduct._doc}})
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({success:false,message:`Server Error`})
+  }
+};
+
+async function editProduct(req,res){
+  const id = req.params.id;
+  const {name,category,price,inStock,stock} = req.body
+  try {
+    const product = await Product.findById(id);
+    if(!product){
+      return res.status(404).json({success:false,message:`Product not found`})
+    }
+    const editImage= await cloudinary.uploader.upload(req.file.path,{public_id:product.publicId,invalidate:true});
+    const {publicId,url}= editImage;
+    const updateProductInMongo= await Product.findByIdAndUpdate(id,{name:name,category:category,price:price,inStock:inStock,stock:stock,publicId:publicId,url:url
+
+    });
+    await updateProductInMongo.save();
+    fs.unlinkSync(req.file.path)
+    res.status(200).json({success:true,message:`Successfully updated product`,update:updateProductInMongo})
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({success:false,message:`Server Error`})
+  }
+}
+
+async function deleteProduct(req,res){
+  try {
+    const getCurrentProductId = req.params.id;
+    const product = await Product.findById(getCurrentProductId);
+    if(!product){
+      return res.status(404).json({success:false,message:`Product not found`})
+    }
+    //delete from cloudinary
+    await cloudinary.uploader.destroy(product.publicId);
+    //delete from mongodb collection
+    await Product.findByIdAndDelete(product._id);
+    res.status(200).json({success:true,message:`Product successfully deleted`,product:{...product._doc}})
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({success:false,message:`Server Error`})
+  }
+};
+
+
+export {createProduct,deleteProduct,fetchProduct,editProduct}
