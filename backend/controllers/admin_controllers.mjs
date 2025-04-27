@@ -24,7 +24,23 @@ async function fetchProduct(req,res) {
   }
 };
 
+async function fetchProductCreatedByAdmin(req,res){
+  try {
+    const adminId = req.userId;
 
+    const response = await Product.find({createdBy:adminId});
+    console.log(response)
+    if(!response){
+      return res.status(404).json({success:false,message:`Admin does not exist`})
+    };
+
+    res.status(200).json({success:true,message:`Successfully retreived products`,products:[...response]})
+
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({success:false,message:`Server Error, could not get products`})
+  }
+}
 
 async function createProduct(req,res){
 
@@ -98,4 +114,4 @@ async function deleteProduct(req,res){
 };
 
 
-export {createProduct,deleteProduct,fetchProduct,editProduct}
+export {createProduct,deleteProduct,fetchProduct,editProduct,fetchProductCreatedByAdmin}
