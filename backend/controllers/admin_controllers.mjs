@@ -41,6 +41,7 @@ async function createProduct(req,res){
     const newProduct = new Product({
       name:name,
       category:category,
+      createdBy:req.userId,
       price:price,
       inStock:inStock,
       stock:stock,
