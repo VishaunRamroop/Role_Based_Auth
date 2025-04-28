@@ -2,7 +2,7 @@ import Product from "../models/product_schema.mjs";
 import uploadCloud from '../utils/upload-cloudinary.mjs'
 import fs from 'fs';
 import cloudinary from "../config/cloudinary.mjs";
-
+import User from "../models/user_schema.mjs";
 //pagination
 async function fetchProduct(req,res) {
   try {
@@ -39,6 +39,19 @@ async function fetchProductCreatedByAdmin(req,res){
   } catch (error) {
     console.error(error);
     res.status(500).json({success:false,message:`Server Error, could not get products`})
+  }
+};
+
+async function getAdminInfo(req,res){
+  try {
+    const response = await User.findById(req.userId);
+    if(!response){
+      return res.status(404).json({success:true,message:`Admin does not exist`})
+    };
+    res.status(200).json({success:true,message:`successfully retreived admin`,user:{...response._doc,password:undefined}})
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({success:false,message:`Server Error`})
   }
 }
 
@@ -114,4 +127,4 @@ async function deleteProduct(req,res){
 };
 
 
-export {createProduct,deleteProduct,fetchProduct,editProduct,fetchProductCreatedByAdmin}
+export {createProduct,deleteProduct,fetchProduct,editProduct,fetchProductCreatedByAdmin,getAdminInfo}
