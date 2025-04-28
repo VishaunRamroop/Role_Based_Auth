@@ -11,6 +11,7 @@ export default function AdminSidebar() {
     <aside className='admin-sidebar'>
  
       <ul className='admin-menu'>
+        <Link to={'/admin'} className='admin-option'>Home</Link>
         <Link to={'/account-info'} className='admin-option'>Account Information</Link>
         <Link to={'/create-product'}  className='admin-option'>Create Product</Link>
         <Link to={'/account-security'}  className='admin-option'>Security</Link>
