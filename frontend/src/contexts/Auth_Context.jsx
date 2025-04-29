@@ -2,6 +2,7 @@ import axios from "axios";
 import { useContext,createContext } from "react";
 import { useState } from "react";
 import {useCookies} from 'react-cookie';
+import { Navigate } from "react-router-dom";
 const AuthContext = createContext();
 
 
@@ -56,7 +57,8 @@ console.log(user)
 async function Logout(){
   ['token'].forEach((cookie)=>{
     removeCookie(cookie)
-  })
+  });
+
 }
 
 

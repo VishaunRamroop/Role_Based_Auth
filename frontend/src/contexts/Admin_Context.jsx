@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useState,useContext,createContext } from "react";
-
+import { jwtDecode } from "jwt-decode";
+import useAuthProvider from './Auth_Context'
 const AdminContext= createContext();
 
 
@@ -8,27 +9,42 @@ const AdminContext= createContext();
 
 export function AdminProvider({children}){
 
-const [products,  getProducts]= useState([]);
+const [products,  setProducts]= useState([]);
+const [adminErr,setAdminErr]= useState('');
+const [info,setInfo]= useState('')
+  const base_Url= `http://localhost:3000/api/admin`;
 
-  const base_Url= `http://localhost:3000/api/admin/all_admin_products`
-async function getAdminProducts() {
+const {cookies}= useAuthProvider()
+  async function getAdminProducts() {
   try {
-  const response = await axios.get(`${base_Url}`)  ;
-  return response  
+  const response = await axios.get(`${base_Url}/get_products`,{headers:{Authorization:`Bearer ${cookies?.token}`
+  }})  ;
+
+  return response.products  
   } catch (error) {
-    console.error(error)
+    console.error(error);
+    setAdminErr(error)
   }
 };
 
-async function getAdminInfo() {
+async function getAdminInfo(){
+ 
   try {
-    const response = await axios.get(`${base_Url}`)
+
+    console.log(cookies)
+    const response = await axios.get(`http://localhost:3000/api/admin/get_admin`,{
+      headers:{Authorization:`Bearer ${cookies?.token}`}
+    });
+
+    console.log(response.data.user)
+    return response.data.user
   } catch (error) {
     console.error(error)
   }
 }
 
-let values={getAdminProducts};
+
+let values={getAdminProducts,getAdminInfo,adminErr,setAdminErr,products,setProducts,info,setInfo};
   return <AdminContext.Provider value={values}>
     {children}
 

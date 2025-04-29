@@ -5,13 +5,18 @@ import useAdminProvider from '../contexts/Admin_Context';
 import './Admin_Info.css'
 export default function AdminInfo({props}) {
   const {user,cookies}= useAuthProvider();
-  const {getAdminProducts}= useAdminProvider()
+  const {getAdminProducts,getAdminInfo,info,setInfo}= useAdminProvider()
   const decode = jwtDecode(cookies.token);
 // console.log(user)
 //   console.log(decode)
 
+
+async function getInfo(){
+  setInfo( await getAdminInfo())
+}
+console.log(info)
 useEffect(()=>{
-  
+getInfo()
 },[])
   return (
     <div className='admin-info-container'>
@@ -25,9 +30,9 @@ useEffect(()=>{
           </thead>
           <tbody>
          <tr>
-         <td>{decode.id}</td>
-            <td>{decode.name}</td>
-            <td>{decode.role}</td>
+         <td>{decode?.id}</td>
+            <td>{info?.name}</td>
+            <td>{decode?.role}</td>
          </tr>
           </tbody>
       </table>
