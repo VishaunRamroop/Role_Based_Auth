@@ -2,15 +2,15 @@ import {useEffect, useState} from 'react'
 import { Outlet } from 'react-router-dom';
 import useAuthProvider from '../contexts/Auth_Context';
 import { jwtDecode } from 'jwt-decode';
-import { Navigate} from 'react-router-dom';
+import { Navigate,useNavigate} from 'react-router-dom';
 
 export default function ProtectAdminRoutes() {
   const {cookies,Logout} = useAuthProvider();
-
+  const nav= useNavigate();
 // checks if there is a valid token
 // even if a user/admin or a non registered user
 // will be redirected back to login if they try to access the admin routes
-const currentTime = Math.floor(Date.now()/1000)
+
 if(!cookies?.token){
   return <Navigate to={'/login'} replace/>
 };
@@ -34,9 +34,15 @@ if(decode?.role!=='admin'){
 } 
 
 useEffect(()=>{
+  const currentTime = Math.floor(Date.now()/1000);
+let timeOut =setTimeout(()=>{
+ alert('Session timed out')
+nav('/login');
+Logout()
+},(decode.exp -currentTime)*1000)
+return ()=> clearTimeout(timeOut)
+},[cookies?.token])
 
-},[])
-
-  return <Outlet/>
+  return <> <Outlet/></>
      
 }
