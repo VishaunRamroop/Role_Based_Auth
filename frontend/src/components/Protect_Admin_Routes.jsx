@@ -18,7 +18,6 @@ if(!cookies?.token){
 let decode;
 try {
   decode = jwtDecode(cookies?.token);
-console.log(decode.exp <currentTime)
 } catch (error) {
   console.error(error);
  return  <Navigate to={'/login'} replace/>
@@ -36,6 +35,7 @@ if(decode?.role!=='admin'){
 useEffect(()=>{
   const currentTime = Math.floor(Date.now()/1000);
 let timeOut =setTimeout(()=>{
+  //replace this with react-toast
  alert('Session timed out')
 nav('/login');
 Logout()

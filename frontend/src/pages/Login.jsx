@@ -25,7 +25,9 @@ const nav= useNavigate();
     console.error(error);
  
    }finally{
-    setLoading(false)
+    setLoading(false);
+    setEmail('');
+    setPassword('')
    }
 
   }
