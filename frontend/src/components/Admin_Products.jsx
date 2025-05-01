@@ -1,23 +1,37 @@
 import {useEffect, useState} from 'react'
 import useAdminProvider from '../contexts/Admin_Context';
+import CustomButton from './Custom_Button';
+import {ChevronRight,ChevronLeft} from 'lucide-react'
 import './Admin_Products.css'
 export default function AdminProducts() {
-  const {getAdminProducts,products,setProducts}= useAdminProvider();
-
+  const {getAdminProducts,products,setProducts,totalPages,setTotalPages}= useAdminProvider();
+  const [page,setPage]= useState(1);
+  const [createAt,setCreatedAt]= useState('createdAt');
+  const [sortOrder,setSortOrder]= useState('asc');
+ 
 async function getProducts(){
-  setProducts(await getAdminProducts())
+try {
+  const response = await getAdminProducts(page,'createdAt','asc')
+  
+  setProducts(response.products);
+} catch (error) {
+  console.error(error)
+}finally{
+
+}
+
 }
 
 
   useEffect(()=>{
-    getProducts()
+    getProducts(page,'createdAt','asc')
     let updateProductList = setInterval(()=>{
-      getProducts();
+      getProducts(page,'createdAt','asc');
       console.log('updated')
     },50000)
     return ()=> clearInterval(updateProductList)
-  },[])
-
+  },[page])
+console.log(totalPages)
   return (
     <div className='admin-products-container'>
       <table>
@@ -56,6 +70,9 @@ async function getProducts(){
         
         </tbody>
       </table>
+      <button onClick={()=>{setPage(p=>p+1)}} disabled={page===totalPages}>Next</button>
+      <button onClick={()=>{setPage(p=>p-1)}} disabled={page===1}>Previous</button>
+        
     </div>
   )
 }

@@ -8,7 +8,7 @@ const AdminContext= createContext();
 
 
 export function AdminProvider({children}){
-
+  const [totalPages,setTotalPages]= useState(1)
 const [products,  setProducts]= useState([]);
 const [adminErr,setAdminErr]= useState('');
 const [info,setInfo]= useState('')
@@ -17,12 +17,13 @@ const [info,setInfo]= useState('')
 const {cookies}= useAuthProvider();
 
 
-  async function getAdminProducts() {
+  async function getAdminProducts(page,createAt,sortOrder) {
   try {
-  const response = await axios.get(`${base_Url}/all_admin_products`,{headers:{Authorization:`Bearer ${cookies?.token}`
+  const response = await axios.get(`${base_Url}/all_admin_products?page=${page}&sortFilter=${createAt}&sortOrder=${sortOrder}`,{headers:{Authorization:`Bearer ${cookies?.token}`
   }})  ;
   console.log(response.data)
-  return response.data.products  
+  setTotalPages(response.data.totalpages)
+  return response.data 
   } catch (error) {
     console.error(error);
     setAdminErr(error)
@@ -44,7 +45,7 @@ async function getAdminInfo(){
 }
 
 
-let values={getAdminProducts,getAdminInfo,adminErr,setAdminErr,products,setProducts,info,setInfo};
+let values={getAdminProducts,getAdminInfo,adminErr,setAdminErr,products,setProducts,info,setInfo,totalPages,setTotalPages};
   return <AdminContext.Provider value={values}>
     {children}
 
