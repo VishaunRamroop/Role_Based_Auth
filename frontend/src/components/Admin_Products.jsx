@@ -10,7 +10,12 @@ async function getProducts(){
 
 
   useEffect(()=>{
-  getProducts()
+    getProducts()
+    let updateProductList = setInterval(()=>{
+      getProducts();
+      console.log('updated')
+    },50000)
+    return ()=> clearInterval(updateProductList)
   },[])
 
   return (
