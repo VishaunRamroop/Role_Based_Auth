@@ -1,22 +1,21 @@
-.admin-info-container{
-  grid-area: admin-info;
+.admin-products-container{
+  grid-area: product-container;
   overflow-x: auto;
   display: grid;
- align-items: flex-start;
+  align-items: flex-start;
   justify-content: center;
   padding: 1rem;
   margin: 1rem;
-  
 
 }
-
-.admin-info-container table{
+.admin-products-container table{
   padding: 1rem;
   width: 100%;
   border: 1px solid;
 
 }
-.admin-info-container table td{
+.admin-products-container table td{
   text-align: center;
   padding: 1rem;
+  width: 50px;
 }

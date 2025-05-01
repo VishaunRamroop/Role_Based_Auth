@@ -14,18 +14,20 @@ export default function AdminInfo({props}) {
 async function getInfo(){
   setInfo( await getAdminInfo())
 }
-console.log(info)
+
 useEffect(()=>{
 getInfo()
 },[])
   return (
-    <div className='admin-info-container'>
+    <div className='admin-info-container' >
       <table>
         <thead>
        <tr>
           <th>ID</th>
           <th>Name</th>
           <th>Title</th>
+          <th>EMAIL</th>
+          <th>Last Login</th>
        </tr>
           </thead>
           <tbody>
@@ -33,6 +35,8 @@ getInfo()
          <td>{decode?.id}</td>
             <td>{info?.name}</td>
             <td>{decode?.role}</td>
+            <td>{info?.email}</td>
+            <td>{info.lastLogin}</td>
          </tr>
           </tbody>
       </table>

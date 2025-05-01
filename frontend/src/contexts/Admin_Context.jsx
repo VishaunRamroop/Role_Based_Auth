@@ -14,13 +14,15 @@ const [adminErr,setAdminErr]= useState('');
 const [info,setInfo]= useState('')
   const base_Url= `http://localhost:3000/api/admin`;
 
-const {cookies}= useAuthProvider()
+const {cookies}= useAuthProvider();
+
+
   async function getAdminProducts() {
   try {
-  const response = await axios.get(`${base_Url}/get_products`,{headers:{Authorization:`Bearer ${cookies?.token}`
+  const response = await axios.get(`${base_Url}/all_admin_products`,{headers:{Authorization:`Bearer ${cookies?.token}`
   }})  ;
-
-  return response.products  
+  console.log(response.data)
+  return response.data.products  
   } catch (error) {
     console.error(error);
     setAdminErr(error)
@@ -31,12 +33,10 @@ async function getAdminInfo(){
  
   try {
 
-    console.log(cookies)
     const response = await axios.get(`http://localhost:3000/api/admin/get_admin`,{
       headers:{Authorization:`Bearer ${cookies?.token}`}
     });
 
-    console.log(response.data.user)
     return response.data.user
   } catch (error) {
     console.error(error)

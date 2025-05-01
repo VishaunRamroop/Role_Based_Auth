@@ -1,47 +1,54 @@
 import {useEffect, useState} from 'react'
-import useAdminProvider from '../contexts/Admin_Context'
+import useAdminProvider from '../contexts/Admin_Context';
+import './Admin_Products.css'
 export default function AdminProducts() {
   const {getAdminProducts,products,setProducts}= useAdminProvider();
 
-
+async function getProducts(){
+  setProducts(await getAdminProducts())
+}
 
 
   useEffect(()=>{
-
+  getProducts()
   },[])
-  console.log(products)
+
   return (
-    <div>
+    <div className='admin-products-container'>
       <table>
         <thead>
           <tr>
-            <td>{products?._id}</td>
-            <td>{products?.name}</td>
-            <td>{products?.category}</td>
-            <td>{products?.createdBy}</td>
-            <td>{products?.createdAt}</td>
-            <td>{products?.updatedAt}</td>
-            <td>{products?.price}</td>
-            <td>{products?.inStock}</td>
-            <td>{products?.stock}</td>
-            <td>{products?.publicId}</td>
-            <td>{products?.url}</td>
+            
+              <th>NAME</th>
+              <th>CATEGORY</th>
+              <th>createdBy</th>
+              <th>createdAt</th>
+              <th>updatedAt</th>
+              <th>PRICE</th>
+              <th>in-STOCK</th>
+              <th>STOCK</th>
+      
+           
           </tr>
         </thead>
         <tbody>
-        <tr>
-        <td>{products?._id}</td>
-            <td>{products?.name}</td>
-            <td>{products?.category}</td>
-            <td>{products?.createdBy}</td>
-            <td>{products?.createdAt}</td>
-            <td>{products?.updatedAt}</td>
-            <td>{products?.price}</td>
-            <td>{products?.inStock}</td>
-            <td>{products?.stock}</td>
-            <td>{products?.publicId}</td>
-            <td>{products?.url}</td>
-          </tr>
+        
+          {products?.map((product)=>{
+            return <tr key={product._id}>
+          
+            <td>{product?.name}</td>
+            <td>{product?.category}</td>
+            <td>{product?.createdBy}</td>
+            <td>{product?.createdAt}</td>
+            <td>{product?.updatedAt}</td>
+            <td>{product?.price}</td>
+            <td>{product?.inStock}</td>
+            <td>{product?.stock}</td>
+  
+         
+            </tr>
+          })}
+        
         </tbody>
       </table>
     </div>
