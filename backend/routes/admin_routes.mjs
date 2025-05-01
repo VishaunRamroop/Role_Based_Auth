@@ -5,10 +5,10 @@ import {createProduct,deleteProduct,fetchProduct,editProduct,fetchProductCreated
 import checkAdmin from '../middlewares/is_admin.mjs';
 const router = express.Router();
 
-
+router.get('/get_admin',auth,checkAdmin,getAdminInfo)
 router.get('/get_products',auth,checkAdmin,fetchProduct);
 router.get('/all_admin_products',auth,checkAdmin,fetchProductCreatedByAdmin);
-router.get('/get_admin',auth,checkAdmin,getAdminInfo)
+
 router.post('/create_product',auth,checkAdmin,upload.single('image'),createProduct);
 router.put('/edit_product/:id',auth,checkAdmin,upload.single('image'),checkAdmin,editProduct)
 router.delete('/delete_product/:id',auth,checkAdmin,deleteProduct);

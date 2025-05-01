@@ -6,16 +6,18 @@ const registerUser= async(req,res)=>{try {
   console.log(password)
   if(!name || !email || !password){
     return res.status(400).json({success:false,message:`All fields must be completed!`})
-  }
-  const user = await User.findOne({email:email});
+  };
+  const parseEmail = email.toLowerCase();
+  const parseName = name.toLowerCase()
+  const user = await User.findOne({email:parseEmail});
   if(user){
     return res.status(400).json({success:false,message:`Error email already in use.`})
   };
 
 const hashedPassword = await bcrypt.hash(password,10)
   const newUser = new User({
-    name:name,
-    email:email,
+    name:parseName,
+    email:parseEmail,
     password:hashedPassword,
     role:role ||'user'
   });
@@ -27,8 +29,8 @@ const hashedPassword = await bcrypt.hash(password,10)
 }}
 const loginUser= async(req,res)=>{try {
   const {email,password}= req.body;
-
-  const user = await User.findOne({email:email});
+  const parseEmail = email.toLowerCase()
+  const user = await User.findOne({email:parseEmail});
   if(!user){
     return res.status(400).json({success:false,message:`Invalid Credentials!`})
   };

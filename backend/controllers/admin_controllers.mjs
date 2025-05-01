@@ -26,15 +26,26 @@ async function fetchProduct(req,res) {
 
 async function fetchProductCreatedByAdmin(req,res){
   try {
+
     const adminId = req.userId;
 
-    const response = await Product.find({createdBy:adminId});
-    console.log(response)
-    if(!response){
+   
+
+    const page = req.query.page ||1;
+    const limit = req.query.limit||5;
+    const skip = (page-1)*limit;
+    const sortOrder = req.query.sort ==='asc'? 1:-1;
+    const sortFilter = req.query.sortFilter || 'createdAt';
+    const totalProduct =await Product.find({createdBy:adminId}).countDocuments();
+    const totalpages = Math.ceil(totalProduct/limit);
+    const sortObj={};
+    sortObj[sortFilter]= sortOrder;
+    const products = await Product.find({createdBy:adminId}).sort(sortObj).skip(skip).limit(limit);
+    if(!products){
       return res.status(404).json({success:false,message:`Admin does not exist`})
     };
 
-    res.status(200).json({success:true,message:`Successfully retreived products`,products:[...response]})
+    res.status(200).json({success:true,message:`Successfully retreived products`,currentPage:page, totalpages:totalpages,products:[...products]})
 
   } catch (error) {
     console.error(error);
@@ -44,11 +55,13 @@ async function fetchProductCreatedByAdmin(req,res){
 
 async function getAdminInfo(req,res){
   try {
-    const response = await User.findById(req.userId);
-    if(!response){
+    console.log(req.userId)
+    const user = await User.findById(req.userId);
+    console.log(user)
+    if(!user){
       return res.status(404).json({success:true,message:`Admin does not exist`})
     };
-    res.status(200).json({success:true,message:`successfully retreived admin`,user:{...response._doc,password:undefined}})
+    res.status(200).json({success:true,message:`successfully retreived admin`,user:{...user._doc,password:undefined}})
   } catch (error) {
     console.error(error);
     res.status(500).json({success:false,message:`Server Error`})
