@@ -11,7 +11,7 @@ export default function AdminProducts() {
  
 async function getProducts(){
 try {
-  const response = await getAdminProducts(page,'createdAt','asc')
+  const response = await getAdminProducts(page,'createdAt',sortOrder)
   
   setProducts(response.products);
 } catch (error) {
@@ -24,14 +24,15 @@ try {
 
 
   useEffect(()=>{
-    getProducts(page,'createdAt','asc')
+    getProducts(page,'createdAt',sortOrder)
     let updateProductList = setInterval(()=>{
-      getProducts(page,'createdAt','asc');
+      getProducts(page,'createdAt',sortOrder);
       console.log('updated')
     },50000)
     return ()=> clearInterval(updateProductList)
-  },[page])
+  },[page,sortOrder])
 console.log(totalPages)
+console.log(sortOrder)
   return (
     <div className='admin-products-container'>
       <table>
@@ -70,8 +71,15 @@ console.log(totalPages)
         
         </tbody>
       </table>
-      <button onClick={()=>{setPage(p=>p+1)}} disabled={page===totalPages}>Next</button>
-      <button onClick={()=>{setPage(p=>p-1)}} disabled={page===1}>Previous</button>
+          <div className="pagination-container">
+            <select onChange={(e)=>{setSortOrder(e.target.value)}}>
+              <option value="asc" >Ascending</option>
+              <option value="desc">Decending</option>
+            </select>
+          <button onClick={()=>{setPage(p=>p-1)}} disabled={page===1}>Previous</button>
+          <button onClick={()=>{setPage(p=>p+1)}} disabled={page===totalPages}>Next</button>
+          
+          </div>
         
     </div>
   )
