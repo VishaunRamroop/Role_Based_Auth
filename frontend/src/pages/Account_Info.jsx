@@ -1,7 +1,7 @@
 
-import AdminSidebar from '../components/Admin_Sidebar';
-import AdminSearchbar from '../components/Admin_Searchbar';
-import AdminInfo from '../components/Admin_Info';
+import AdminSidebar from '../components/Admin_Sidebar/Admin_Sidebar';
+import AdminSearchbar from '../components/Admin_Searchbar/Admin_Searchbar';
+import AdminInfo from '../components/Admin_Info/Admin_Info.jsx';
 import { Search } from 'lucide-react';
 
 import './Admin.css'

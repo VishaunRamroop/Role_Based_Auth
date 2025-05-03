@@ -7,7 +7,7 @@ import { Navigate } from 'react-router-dom';
 import './App.css'
 import AccountInfo from './pages/Account_Info';
 import AdminCreateProduct from './pages/Admin_Create_Product';
-import ProtectAdminRoutes from './components/Protect_Admin_Routes';
+import ProtectAdminRoutes from './components/Protected_Routes/Protect_Admin_Routes';
 import HomePage from './pages/Home_Page';
 import { jwtDecode } from 'jwt-decode';
 import Signup from './pages/Signup';

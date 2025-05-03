@@ -1,6 +1,6 @@
 import {useState} from 'react';
-import CustomInput from '../components/Custom_Input';
-import CustomButton from '../components/Custom_Button';
+import CustomInput from '../components/Custom_Components/Custom_Input';
+import CustomButton from '../components/Custom_Components/Custom_Button';
 import {Mail,Lock,SendHorizonal} from 'lucide-react';
 import useAuthProvider from '../contexts/Auth_Context';
 import { useNavigate } from 'react-router-dom';

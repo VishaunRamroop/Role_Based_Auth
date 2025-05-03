@@ -1,7 +1,7 @@
 import {useState,useEffect} from 'react';
-import useAuthProvider from '../contexts/Auth_Context';
+import useAuthProvider from '../../contexts/Auth_Context';
 import { jwtDecode } from 'jwt-decode';
-import useAdminProvider from '../contexts/Admin_Context';
+import useAdminProvider from '../../contexts/Admin_Context';
 import './Admin_Info.css'
 export default function AdminInfo({props}) {
   const {user,cookies}= useAuthProvider();

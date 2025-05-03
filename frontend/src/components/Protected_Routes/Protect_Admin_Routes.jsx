@@ -1,6 +1,6 @@
 import {useEffect, useState} from 'react'
 import { Outlet } from 'react-router-dom';
-import useAuthProvider from '../contexts/Auth_Context';
+import useAuthProvider from '../../contexts/Auth_Context';
 import { jwtDecode } from 'jwt-decode';
 import { Navigate,useNavigate} from 'react-router-dom';
 

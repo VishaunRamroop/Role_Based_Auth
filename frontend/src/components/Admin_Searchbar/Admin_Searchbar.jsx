@@ -1,5 +1,5 @@
 import {useState} from 'react'
-import CustomInput from '../components/Custom_Input';
+import CustomInput from '../Custom_Components/Custom_Input.jsx';
 import './Admin_Searchbar.css'
 export default function AdminSearchbar({type,icon}) {
 

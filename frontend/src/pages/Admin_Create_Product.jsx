@@ -1,7 +1,8 @@
 
-import AdminSidebar from '../components/Admin_Sidebar';
-import AdminSearchbar from '../components/Admin_Searchbar';
+import AdminSidebar from '../components/Admin_Sidebar/Admin_Sidebar.jsx';
+import AdminSearchbar from '../components/Admin_Searchbar/Admin_Searchbar.jsx';
 import { Search } from 'lucide-react';
+import CreateProductForm from '../components/Create_Product_Form/Create_Product_Form.jsx';
 import './Admin.css'
 export default function AdminCreateProduct() {
 
@@ -10,7 +11,7 @@ export default function AdminCreateProduct() {
       
       <AdminSearchbar type ={'text'} icon={Search}/>
       <AdminSidebar/>
-      <p>Create product goes here</p>
+      <CreateProductForm/>
     </div>
   )
 }

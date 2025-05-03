@@ -1,6 +1,6 @@
 import {useState} from 'react'
 import { Link } from 'react-router-dom';
-import useAuthProvider from '../contexts/Auth_Context';
+import useAuthProvider from '../../contexts/Auth_Context';
 import './Admin_Sidebar.css';
 export default function AdminSidebar() {
   const {Logout}= useAuthProvider();

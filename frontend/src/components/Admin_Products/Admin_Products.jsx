@@ -1,6 +1,6 @@
 import {useEffect, useState} from 'react'
-import useAdminProvider from '../contexts/Admin_Context';
-import CustomButton from './Custom_Button';
+import useAdminProvider from '../../contexts/Admin_Context';
+import CustomButton from '../Custom_Components/Custom_Button';
 import {ChevronRight,ChevronLeft} from 'lucide-react'
 import './Admin_Products.css'
 export default function AdminProducts() {
