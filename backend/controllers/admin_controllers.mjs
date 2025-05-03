@@ -34,12 +34,13 @@ async function fetchProductCreatedByAdmin(req,res){
     const page = req.query.page ||1;
     const limit = req.query.limit||5;
     const skip = (page-1)*limit;
-    const sortOrder = req.query.sort ==='asc'? 1:-1;
+    const sortOrder = req.query.sortOrder ==='asc'? 1:-1;
     const sortFilter = req.query.sortFilter || 'createdAt';
     const totalProduct =await Product.find({createdBy:adminId}).countDocuments();
     const totalpages = Math.ceil(totalProduct/limit);
     const sortObj={};
     sortObj[sortFilter]= sortOrder;
+  console.log(page,sortOrder,sortFilter)
     const products = await Product.find({createdBy:adminId}).sort(sortObj).skip(skip).limit(limit);
     if(!products){
       return res.status(404).json({success:false,message:`Admin does not exist`})
@@ -55,9 +56,9 @@ async function fetchProductCreatedByAdmin(req,res){
 
 async function getAdminInfo(req,res){
   try {
-    console.log(req.userId)
+    
     const user = await User.findById(req.userId);
-    console.log(user)
+
     if(!user){
       return res.status(404).json({success:true,message:`Admin does not exist`})
     };
