@@ -5,7 +5,7 @@ import useAuthProvider from './contexts/Auth_Context';
 import Login from './pages/Login';
 import { Navigate } from 'react-router-dom';
 import './App.css'
-import AccountInfo from './pages/Account_Info';
+
 import AdminCreateProduct from './pages/Admin_Create_Product';
 import ProtectAdminRoutes from './components/Protected_Routes/Protect_Admin_Routes';
 import HomePage from './pages/Home_Page';
@@ -40,7 +40,7 @@ function App() {
           <Route path='/admin' element= {
             <Admin/> }
          />
-          <Route path='/account-info' element={<AccountInfo/>}/>
+         
           <Route path='/create-product' element={<AdminCreateProduct/>}/>
           </Route>
           <Route path='/' element={<HomePage/>}/>

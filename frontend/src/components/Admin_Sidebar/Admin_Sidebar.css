@@ -9,13 +9,9 @@
   position: relative;
 
   transition: all .5s ease-in-out;
-  grid-area: admin-sidebar;
+
 }
-.X{
-  position: absolute;
-  right: 0;
-   color: #FDFAF6;
-}
+
 .admin-menu{
   display: flex;
   flex-direction: column;
@@ -26,10 +22,7 @@
   align-items: start;
   
 }
-.admin-sidebar:hover{
-  left: 0;
-  
-}
+
 .admin-option{
  
   text-decoration: none;

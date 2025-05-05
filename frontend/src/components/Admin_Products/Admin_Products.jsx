@@ -62,7 +62,7 @@ console.log(sortOrder)
             <td>{product?.createdAt}</td>
             <td>{product?.updatedAt}</td>
             <td>{product?.price}</td>
-            <td>{product?.inStock}</td>
+            <td>{product?.inStock===true ? 'Yes':'No'}</td>
             <td>{product?.stock}</td>
   
          

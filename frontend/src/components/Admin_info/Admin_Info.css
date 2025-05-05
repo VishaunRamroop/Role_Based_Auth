@@ -1,5 +1,5 @@
 .admin-info-container{
-  grid-area: admin-info;
+ 
   overflow-x: auto;
   display: grid;
  align-items: flex-start;

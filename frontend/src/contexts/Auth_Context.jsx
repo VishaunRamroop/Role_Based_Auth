@@ -41,19 +41,19 @@ async function Login(email,password){
     const result = await axios.post(`${base_url}/login`,{email:email,password:password});
   
   
-
+     console.log(result)
     if(result){
       setUser(result.data.user)
       setCookie('token',result.data.user.token)
     }
- 
+    console.log(result)
     return result      
   } catch (error) {
     console.error(error);
-    setErr(error.response.data.message)
+    setErr(error.response.data.message||'Something went wrong')
   }
 };
-
+console.log(user)
 async function Logout(){
   ['token'].forEach((cookie)=>{
     removeCookie(cookie)

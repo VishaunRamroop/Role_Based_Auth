@@ -12,7 +12,6 @@ export default function AdminSidebar() {
  
       <ul className='admin-menu'>
         <Link to={'/admin'} className='admin-option'>Home</Link>
-        <Link to={'/account-info'} className='admin-option'>Account Information</Link>
         <Link to={'/create-product'}  className='admin-option'>Create Product</Link>
         <Link to={'/account-security'}  className='admin-option'>Security</Link>
         <Link to={'/login'}  className='admin-option' onClick={()=>handleLogout()}>Logout</Link>      
