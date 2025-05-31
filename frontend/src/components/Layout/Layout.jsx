@@ -1,20 +1,15 @@
 import {useState} from 'react';
-import AdminSearchbar from '../Admin_Searchbar/Admin_Searchbar';
-import AdminSidebar from '../Admin_Sidebar/Admin_Sidebar';
-import {Search} from 'lucide-react'
-import './Layout.css'
+
+import {Search} from 'lucide-react';
+import AdminSidebar from '../Admin/Admin_Sidebar/Admin_Sidebar';
+
 export default function Layout({children}) {
   return (
-    <div className='layout'>
-        <header className='header'>
-        <AdminSearchbar type ={'text'} icon={Search}/>
-        </header>
-        <div className="sidebar">
-        <AdminSidebar/>
-        </div>
-      <div className="layout-body">
-       
-        <main className="main-content">
+    <div className='flex flex-col min-h-screen bg-gray-100 '>
+    
+        <div className="flex bg-gray-900 ">
+      <AdminSidebar />
+        <main className="flex flex-col p-4 items-start bg-white min-h-screen w-full">
           {children}
         </main>
       </div>

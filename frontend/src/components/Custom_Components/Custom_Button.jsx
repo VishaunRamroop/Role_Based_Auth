@@ -1,12 +1,15 @@
 import { useState} from 'react'
 
-export default function CustomButton({ icon:Icon,children,...props}) {
+export default function CustomButton({className,alt,disabled,onClick, icon:Icon,children,...props}) {
+  console.log('props',props)
+ 
   return (
-    <div className='custom-btn-container' style={{display:'flex',justifyContent:'center',gap:'10px'}}>
-          <div className="icon-wrapper" style={{display:'flex',justifyContent:'center',alignItems:'center', gap:'10px'}}>
-            <Icon/>
-          </div>
-          <button {...props}>{children}</button>
-    </div>
+    <>
+          
+    
+            <button type='button'{...props} alt={alt||'button'} className={`flex flex-row items-center justify-center gap-2 cursor-pointer w-fit ${className}`} onClick={onClick} disabled={disabled} >{Icon&& <Icon/>}{children}</button>
+        
+          
+    </>
   )
 }

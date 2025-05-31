@@ -11,12 +11,7 @@ export function AdminProvider({children}){
   const [totalPages,setTotalPages]= useState(1)
 const [products,  setProducts]= useState([]);
 const [adminErr,setAdminErr]= useState('');
-const [info,setInfo]= useState('');
-const [name,setName] = useState('')
-const [category,setCategory] = useState('')
-const [price,setPrice] = useState(0)
-const [inStock,setInStock] = useState(true)
-const [stock,setStock] = useState(1)
+const [info,setInfo]= useState('')
   const base_Url= `http://localhost:3000/api/admin`;
 
 const {cookies}= useAuthProvider();
@@ -66,10 +61,25 @@ try {
 }finally{
 
 }
+};
+
+async function editProduct(id,data){
+  try {
+    const response = await axios({
+      url:`http://localhost:3000/api/admin/edit_product/${id}`,
+      method:'put',
+      data:data,
+      headers:{Authorization:`Bearer ${cookies?.token}`}
+    });
+console.log(response)
+  } catch (error) {
+    console.error(error)
+  }
 }
 
 
-let values={getAdminProducts,getAdminInfo,adminErr,setAdminErr,products,setProducts,info,setInfo,totalPages,setTotalPages,name,setName,category,setCategory,price,setPrice,inStock,setInStock,stock,setStock,createProduct};
+
+let values={getAdminProducts,getAdminInfo,adminErr,setAdminErr,products,setProducts,info,setInfo,totalPages,setTotalPages,createProduct,editProduct};
   return <AdminContext.Provider value={values}>
     {children}
 
