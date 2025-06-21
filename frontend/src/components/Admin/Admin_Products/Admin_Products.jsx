@@ -1,13 +1,13 @@
 import {useEffect, useState} from 'react'
 import useAdminProvider from '../../../contexts/Admin_Context';
 import CustomButton from '../../Custom_Components/Custom_Button';
-import {ChevronRight,ChevronLeft} from 'lucide-react'
+
 import { tdStyles } from '../../../utils/stlyes.mjs';
 import { productsTableHead } from '../../../utils/tableHeadArrays.mjs';
 export default function AdminProducts() {
-  const {getAdminProducts,products,setProducts,totalPages,setTotalPages,editProduct}= useAdminProvider();
+  const {getAdminProducts,products,setProducts,totalPages,editProduct,deleteProduct}= useAdminProvider();
   const [page,setPage]= useState(1);
-  const [createAt,setCreatedAt]= useState('createdAt');
+
   const [sortOrder,setSortOrder]= useState('asc');
   const [isEditingProductId,setIsEditingProductId]= useState();
   const [editedData,setEditedData] = useState({});
@@ -43,6 +43,17 @@ try {
   function handleCancel(){
     setIsEditingProductId(null);
     setEditedData({})
+  };
+  async function handleDelete(id){
+try {
+ const updatedProducts= await deleteProduct(id);
+ await getProducts(page,'createdAt',sortOrder);
+ 
+} catch (error) {
+  console.error(error)
+  
+}
+
   }
 
    function handleChange(e){
@@ -53,6 +64,7 @@ try {
     
   }
   async function handleSubmit(){
+    
     const form = new FormData();
     form.append('name',editedData?.name)
     form.append('category',editedData?.category)
@@ -70,7 +82,7 @@ try {
   return (
     <div className='flex flex-col items-center justify-center p-4 min-w-full min-h-screen bg-gray-100 overflow-x-auto relative'>
     <div className="w-full max-w-6xl  h-[600px] overflow-t-auto">
-        <table className='min-w-full divide-y divide-gray-200 '> 
+        <table className='min-h-full divide-y divide-gray-200 '> 
         <thead className='bg-gray-50'>
           <tr>
             {productsTableHead.map((head,index)=>{
@@ -114,9 +126,13 @@ try {
                 <div className='flex flex-row items-center justify-center gap-2'>
                 <CustomButton className={'bg-sky-500 p-4 rounded-xl text-white font-semibold transition-all duration-200 hover:bg-sky-900 hover:font-bold'} onClick={handleSubmit}>Save</CustomButton> 
                 <CustomButton className={'bg-red-500 p-4 rounded-xl text-white font-semibold transition-all duration-200 hover:bg-red-900 hover:font-bold'} onClick={handleCancel}>Cancel</CustomButton> 
-                </div>:
-                <CustomButton className={'bg-emerald-500 p-4 rounded-xl text-white font-semibold transition-all duration-200 hover:bg-emerald-900 hover:font-bold'} onClick={()=>{handleEdit(product)}}>edit</CustomButton>
-                }
+                </div>:<div className="flex">
+                 <CustomButton className={'bg-emerald-500 p-4 rounded-xl text-white font-semibold transition-all duration-200 hover:bg-emerald-900 hover:font-bold'} onClick={()=>{handleEdit(product)}}>edit</CustomButton>
+                
+                <CustomButton 
+                onClick={async ()=>{handleDelete(product._id)}}
+                className={'bg-red-300 p-4 rounded-xl text-white font-semibolded tansition-all duration-200 hover:bg-red-600 hover:font-b gap-2'}>Delete</CustomButton>
+               </div>}
                </td>
             
          

@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react'
+import {useEffect} from 'react'
 import { Outlet } from 'react-router-dom';
 import useAuthProvider from '../../contexts/Auth_Context';
 import { jwtDecode } from 'jwt-decode';
@@ -31,7 +31,9 @@ try {
 if(decode?.role!=='admin'){
   return <Navigate to={'/'} replace/>
 } 
-
+if(decode?.role ==='user'){
+  return <Navigate to={'/'} replace/>
+} 
 useEffect(()=>{
   const currentTime = Math.floor(Date.now()/1000);
 let timeOut =setTimeout(()=>{

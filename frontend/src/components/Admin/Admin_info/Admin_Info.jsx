@@ -1,14 +1,13 @@
-import {useState,useEffect} from 'react';
+import {useEffect} from 'react';
 import useAuthProvider from '../../../contexts/Auth_Context';
 import { jwtDecode } from 'jwt-decode';
 import useAdminProvider from '../../../contexts/Admin_Context';
 import {tdStyles} from '../../../utils/stlyes.mjs';
-export default function AdminInfo({props}) {
-  const {user,cookies}= useAuthProvider();
-  const {getAdminProducts,getAdminInfo,info,setInfo}= useAdminProvider()
+export default function AdminInfo() {
+  const {cookies}= useAuthProvider();
+  const {getAdminInfo,info,setInfo}= useAdminProvider()
   const decode = jwtDecode(cookies.token);
-// console.log(user)
-//   console.log(decode)
+
 
 
 async function getInfo(){

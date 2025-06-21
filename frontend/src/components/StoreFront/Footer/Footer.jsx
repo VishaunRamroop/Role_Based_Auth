@@ -1,11 +1,11 @@
-import {useState} from 'react'
+
 import {Link }from 'react-router-dom';
 
 
-export default function Footer() {
+export default function Footer({background}) {
   return (
-   <footer>
-    <div className="bg-gray-800 text-white p-4">
+   <footer className={`${background? background:'bg-gray-800'}`}>
+    <div className=" text-white p-4">
       <div className="container mx-auto text-center">
         <p className="text-sm">© 2023 StoreFront. All rights reserved.</p>
         <ul className="flex justify-center space-x-4 mt-2">

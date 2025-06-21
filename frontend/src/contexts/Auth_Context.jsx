@@ -24,11 +24,15 @@ async function Signup(name,email,password) {
   try {
     setLoading(true)
     const response = await axios.post(`${base_url}/register`,{name,email,password});
+    setErr('');  
     return response;
 
   } catch (error) {
     console.error(error);
-    setErr(error)
+    const message = error.response?.data?.message || 'Something went wrong';
+    console.error(message);
+    setErr(message);
+    throw new Error(message);
   }finally{
     setLoading(false)
   }
@@ -46,11 +50,19 @@ async function Login(email,password){
       setUser(result.data.user)
       setCookie('token',result.data.user.token)
     }
+    setErr('');
     console.log(result)
     return result      
   } catch (error) {
     console.error(error);
-    setErr(error.response.data.message||'Something went wrong')
+    const message = error.response?.data?.message || 'Something went wrong';
+    console.error(message);
+    setErr(message);
+    throw new Error(message);
+  }finally{
+    setLoading(false)
+    setEmail('')
+    setPassword('')
   }
 };
 console.log(user)

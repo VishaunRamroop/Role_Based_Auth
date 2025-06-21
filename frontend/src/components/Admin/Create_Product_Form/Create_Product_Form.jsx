@@ -4,6 +4,7 @@ import CustomInput from '../../Custom_Components/Custom_Input';
 import useAdminProvider from '../../../contexts/Admin_Context';
 import {Barcode,Banknote,Type,File,Calculator,Check,X,SendHorizonal} from 'lucide-react';
 import CustomForm from '../../Custom_Components/Custom_Form';
+import { toast } from 'react-hot-toast';
 export default function CreateProductForm() {
 const [formData,setFormData]= useState({
   name:'',
@@ -35,8 +36,13 @@ async function handleSubmit(e){
   form.append('inStock',formData.inStock)
   form.append('stock',formData.stock)
   form.append('url',formData.url)
-  await createProduct(form);
-  setFormData({
+ const newProduct= await createProduct(form);
+ if(newProduct)toast.success('Product created successfully');
+  else toast.error('Failed to create product');
+
+  if(fileInputRef.current){
+    fileInputRef.current.value = '';
+      setFormData({
     name:'',
     category:'',
     price:'',
@@ -44,31 +50,40 @@ async function handleSubmit(e){
     stock:'1',
     url:''
   });
-  if(fileInputRef.current){
-    fileInputRef.current.value = '';
   }
 };
-console.log(formData)
+
   return (
    
       
-      <CustomForm onSubmit={handleSubmit} className={`min-h-screen  w-full flex flex-col gap-10 bg-gray-100 shadow-xl rounded-lg p-3 items-center`} >
+      <CustomForm onSubmit={handleSubmit} className={`min-h-screen w-full flex flex-col gap-10 bg-gray-100 shadow-xl rounded-lg p-3 items-center justify-center`}
+      aria-label={'Create Product Form'}
+      role={'form'}
+      >
 
     <CustomInput type={'text'}  aria={'name'} icon={Barcode} placeholder={'Product Name'} 
         name={'name'}
-        onChange={handleChange}/>
-     
+        onChange={handleChange}
+        value={formData.name}
+        />
+
         <CustomInput type={'text'} aria={'category'} icon={Type} placeholder={'Product Category'}
         name={'category'}
-        onChange={handleChange}/>
+        onChange={handleChange}
+        value={formData.category.trim()} 
+        />
   
     <CustomInput type={'text'}  aria={'price'}icon={Banknote} placeholder={'Product Price'}
            name={'price'}
-        onChange={handleChange}/>
+        onChange={handleChange}
+        value={formData.price}
+        />
       
         <CustomInput type={'text'} aria={'stock'}icon={Calculator} placeholder={'Amount of Products in stock'}
         name={'stock'}
-        onChange={handleChange}/>
+        onChange={handleChange}
+        value={formData.stock}
+        />
         {formData.url && typeof formData.url ==='object' && (
           <img src={URL.createObjectURL(formData.url)} alt='image preview' className='w-24 h-24 object-cover rounded'/>
         )}

@@ -1,7 +1,7 @@
-import { useState} from 'react'
+
 
 export default function CustomButton({className,alt,disabled,onClick, icon:Icon,children,...props}) {
-  console.log('props',props)
+  
  
   return (
     <>

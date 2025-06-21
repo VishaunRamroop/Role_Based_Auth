@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useState,useContext,createContext } from "react";
-import { jwtDecode } from "jwt-decode";
+
 import useAuthProvider from './Auth_Context'
 const AdminContext= createContext();
 
@@ -25,7 +25,7 @@ const {cookies}= useAuthProvider();
   setTotalPages(response.data.totalpages)
   return response.data 
   } catch (error) {
-    console.error(error);
+   
     setAdminErr(error)
   }
 };
@@ -55,7 +55,8 @@ try {
     data:formData,
     headers:{Authorization:`Bearer ${cookies?.token}`}
   });
-  console.log(response)
+  return response
+ 
 } catch (error) {
   console.error(error)
 }finally{
@@ -71,7 +72,24 @@ async function editProduct(id,data){
       data:data,
       headers:{Authorization:`Bearer ${cookies?.token}`}
     });
-console.log(response)
+    console.log(response)
+    return response;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
+
+async function deleteProduct(id){
+  try {
+    const response = await axios({
+      url:`http://localhost:3000/api/admin/delete_product/${id}`,
+      method:'delete',
+      headers:{Authorization:`Bearer ${cookies?.token}`}
+    });
+
+  
+    return response.data.products;
   } catch (error) {
     console.error(error)
   }
@@ -79,7 +97,7 @@ console.log(response)
 
 
 
-let values={getAdminProducts,getAdminInfo,adminErr,setAdminErr,products,setProducts,info,setInfo,totalPages,setTotalPages,createProduct,editProduct};
+let values={getAdminProducts,getAdminInfo,adminErr,setAdminErr,products,setProducts,info,setInfo,totalPages,setTotalPages,createProduct,editProduct,deleteProduct};
   return <AdminContext.Provider value={values}>
     {children}
 

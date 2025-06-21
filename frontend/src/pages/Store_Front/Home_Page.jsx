@@ -1,12 +1,13 @@
 import {useState} from 'react'
-import StoreFrontLayout from '../../components/Layout/StoreFrontLayout';
-import Login from '../../pages/Login.jsx'
+import Products from '../../components/StoreFront/Products/Products';
+
+import Cart from '../../components/StoreFront/Cart';
 export default function HomePage() {
   return (
     <div>
-      <StoreFrontLayout>
-  
-      </StoreFrontLayout>
+   <Products /> 
+   <Cart/>
+    
     </div>
   )
 }

@@ -1,6 +1,4 @@
-import {useState} from 'react';
 
-import {Search} from 'lucide-react';
 import AdminSidebar from '../Admin/Admin_Sidebar/Admin_Sidebar';
 
 export default function Layout({children}) {
