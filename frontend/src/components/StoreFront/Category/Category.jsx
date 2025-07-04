@@ -1,9 +1,8 @@
 
 import { useProductContext } from '../../../contexts/Product_Context';
-import CustomModal from '../../Custom_Components/Custom_Modal';
-import useCartContext from '../../../contexts/Cart_Context'
-import { useState } from 'react';
-import { Button } from '@headlessui/react';
+
+import { useState,useEffect } from 'react';
+
 import CustomButton from '../../Custom_Components/Custom_Button';
 export default function Category() {
 
@@ -13,8 +12,12 @@ export default function Category() {
   Grocery: ['fruits', 'vegetables', 'dairy', 'rice', 'flour','chicken', 'fish']
 
 };
-const {selectedFilters, setSelectedFilters} = useProductContext();
+const {selectedFilters, setSelectedFilters,setPage} = useProductContext();
 const [isOpenFilter,setIsOpenFilter]= useState(false)
+
+useEffect(()=>{
+setPage(1)
+},[selectedFilters])
   return <div className='flex flex-col p-2 items-start justify-start'>
   <CustomButton className={`md:hidden`} onClick={()=>setIsOpenFilter(!isOpenFilter)}>Filters</CustomButton>
   <div className="w-64 hidden p-4 bg-white shadow rounded md:flex flex-col">
@@ -34,8 +37,8 @@ const [isOpenFilter,setIsOpenFilter]= useState(false)
               return {
                 ...prev,
                 [filterName]: already
-                  ? (prev[filterName] ||[])?.filter(o => o !== option )
-                  : [...(prev[filterName] ||[]), option ||[]],
+                  ? ((prev[filterName] ||[])?.filter(o => o !== option ) )
+                  : ([...(prev[filterName] ||[]), option ||[]]),
               };
             });
           }}

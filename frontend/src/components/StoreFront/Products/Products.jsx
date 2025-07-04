@@ -6,7 +6,7 @@ import Category from "../Category/Category";
 import useCartContext from "../../../contexts/Cart_Context";
 export default function Products() {  
 
-const {getProducts,products,page,createAt,sortOrder,selectedFilters} = useProductContext();
+const {getProducts,products,page,setPage,createAt,sortOrder,selectedFilters} = useProductContext();
 const {add} = useCartContext()
 
 
