@@ -12,7 +12,7 @@ export function AdminProvider({children}){
 const [products,  setProducts]= useState([]);
 const [adminErr,setAdminErr]= useState('');
 const [info,setInfo]= useState('')
-const API_URL = import.meta.env.API_URL || '/api';
+const API_URL = import.meta.env.VITE_API_URL || '/api';
 const base_url  = `${API_URL}/admin`;
 
 const {cookies}= useAuthProvider();

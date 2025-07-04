@@ -17,7 +17,7 @@ const [page,setPage]= useState(1);
 
 });
 
-const API_URL = import.meta.env.API_URL || '/api';
+const API_URL = import.meta.env.VITE_API_URL || '/api';
 const base_Url  = `${API_URL}/product`;
 async function getProducts(page,sortFilter,sortOrder,categories) {
   try {
