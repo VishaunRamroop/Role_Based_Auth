@@ -1,8 +1,7 @@
 # CloudCart - E-Commerce Store
 
 ## Live Demo
-- **Live App:** [https://your-app.railway.app](https://your-app.railway.app)
-- **GitHub:** [Your GitHub Repo Link]
+
 
 ## Features
 - Product browsing with filtering
