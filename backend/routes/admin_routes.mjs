@@ -10,7 +10,7 @@ router.get('/get_products',auth,checkAdmin,fetchProduct);
 router.get('/all_admin_products',auth,checkAdmin,fetchProductCreatedByAdmin);
 
 router.post('/create_product',auth,checkAdmin,upload.single('url'),createProduct);
-router.put('/edit_product/:id',auth,checkAdmin,upload.single('url'),checkAdmin,editProduct)
+router.put('/edit_product/:id',auth,checkAdmin,upload.single('url'),editProduct)
 router.delete('/delete_product/:id',auth,checkAdmin,deleteProduct);
 
 

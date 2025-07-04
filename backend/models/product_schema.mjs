@@ -2,6 +2,7 @@ import mongoose, { Schema } from "mongoose";
 
 const productSchema= new mongoose.Schema({
   name:{type:String, required:true},
+  company:{type:String, required:true},
   category:{type:String,required:true},
   createdBy:{type:Schema.Types.ObjectId,ref:'user'},
   createdAt:{type:Date,default:Date.now()},

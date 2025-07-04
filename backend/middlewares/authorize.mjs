@@ -19,6 +19,7 @@ const auth=async(req,res,next)=>{
   }
   req.userId = decoded.id;
   req.role = decoded.role;
+  req.company = decoded.company;
   next();
   } catch (error) {
     console.error(error);

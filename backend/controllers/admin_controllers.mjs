@@ -81,8 +81,18 @@ async function createProduct(req,res){
     if(product){
       return res.status(400).json({success:true,message:`Product name already exists!`})
     }
+    console.log('company',req.company)
+    console.log('name',name)
+    console.log('category',category)  
+    console.log('price',price)
+    console.log('inStock',inStock)  
+    console.log('stock',stock)
+    console.log('publicId',publicId)
+    console.log('url',url)
+    const company = req.company;
     const newProduct = new Product({
       name:name,
+      company:company, 
       category:category,
       createdBy:req.userId,
       price:price,
@@ -102,19 +112,23 @@ async function createProduct(req,res){
 
 async function editProduct(req,res){
   const id = req.params.id;
-  const {name,category,price,inStock,stock} = req.body
+  console.log(id)
+  const {name,category,price,inStock,stock} = req.body;
+  console.log(req.file)
   try {
     const product = await Product.findById(id);
+
     if(!product){
       return res.status(404).json({success:false,message:`Product not found`})
     }
-    const editImage= await cloudinary.uploader.upload(req.file.path,{public_id:product.publicId,invalidate:true});
-    const {publicId,url}= editImage;
+    const filePath = req.file?.path || product?.url
+    const editImage= await cloudinary.uploader.upload(filePath,{public_id:product.publicId,invalidate:true});
+    const {publicId,url} = editImage;
     const updateProductInMongo= await Product.findByIdAndUpdate(id,{name:name,category:category,price:price,inStock:inStock,stock:stock,publicId:publicId,url:url
 
     });
     await updateProductInMongo.save();
-    fs.unlinkSync(req.file.path)
+    fs.unlinkSync(req.file?.path || product?.url);
     res.status(200).json({success:true,message:`Successfully updated product`,update:updateProductInMongo})
   } catch (error) {
     console.error(error);
@@ -133,6 +147,7 @@ async function deleteProduct(req,res){
     await cloudinary.uploader.destroy(product.publicId);
     //delete from mongodb collection
     await Product.findByIdAndDelete(product._id);
+    console.log('deleted')
     res.status(200).json({success:true,message:`Product successfully deleted`,product:{...product._doc}})
   } catch (error) {
     console.error(error);
