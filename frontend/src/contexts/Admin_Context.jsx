@@ -12,7 +12,8 @@ export function AdminProvider({children}){
 const [products,  setProducts]= useState([]);
 const [adminErr,setAdminErr]= useState('');
 const [info,setInfo]= useState('')
-  const base_Url= `${import.meta.VITE_ADMIN_URL_}`||`http://localhost:3000/api/admin`;
+const API_URL = import.meta.env.API_URL || '/api';
+const base_url  = `${API_URL}/admin`;
 
 const {cookies}= useAuthProvider();
 

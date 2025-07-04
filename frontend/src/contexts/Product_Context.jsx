@@ -17,7 +17,8 @@ const [page,setPage]= useState(1);
 
 });
 
-const base_Url= `${import.meta.env.VITE_API_URL}`||`http://localhost:3000/api/product`;
+const API_URL = import.meta.env.API_URL || '/api';
+const base_Url  = `${API_URL}/product`;
 async function getProducts(page,sortFilter,sortOrder,categories) {
   try {
   

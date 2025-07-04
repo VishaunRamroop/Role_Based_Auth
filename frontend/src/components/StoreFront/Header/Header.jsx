@@ -1,9 +1,10 @@
 import {useState} from 'react'
 import { Link } from 'react-router-dom';
 import useCartContext from '../../../contexts/Cart_Context';
+import useAuthProvider from '../../../contexts/Auth_Context';
 export default function Header({background}) {
   const [open, setOpen] = useState(false);
-
+const{cookies,Logout}= useAuthProvider()
   const {isOpen,setIsOpen} = useCartContext()
   return (
     <header className={`${background? background:'bg-gray-800'} `}>
@@ -19,8 +20,8 @@ export default function Header({background}) {
              <li className='text-lg w-fit '><span> Store Front </span></li>
           <li><Link to="/" className="hover:underline">Home</Link></li>
       
-          
-          <li><Link to="/login" className="hover:underline">Login</Link></li>
+          {cookies.token?  <li><Link onClick={()=>Logout()} to="/login" className="hover:underline">Logout</Link></li>:  <li><Link to="/login" className="hover:underline">Login</Link></li>}
+        
            <li onClick={()=>setIsOpen(true)}><Link to="#" className="hover:underline"><span>&#x1F6D2;</span></Link></li>
           </div>
         </ul>

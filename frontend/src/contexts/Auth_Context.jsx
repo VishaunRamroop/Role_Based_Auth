@@ -18,8 +18,8 @@ export  function AuthProvider({children}){
   const [name,setName]= useState('');
 
 axios.defaults.withCredentials=true
-const base_url=`${import.meta.VITE_AUTH_URL}`||`http://localhost:3000/api/auth`;
-
+const API_URL = import.meta.env.API_URL || '/api';
+const base_url = `${API_URL}/auth`;
 async function Signup(name,email,password) {
   try {
     setLoading(true)
