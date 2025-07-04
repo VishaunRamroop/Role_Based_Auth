@@ -5,7 +5,28 @@ import useAuthProvider from '../../../contexts/Auth_Context';
 export default function Header({background}) {
   const [open, setOpen] = useState(false);
 const{cookies,Logout}= useAuthProvider()
-  const {isOpen,setIsOpen} = useCartContext()
+  const {isOpen,setIsOpen,cart} = useCartContext();
+
+
+  const CartIcon = ({ className = "w-6 h-6" }) => (
+  <svg 
+    className={className} 
+    fill="none" 
+    stroke="currentColor" 
+    viewBox="0 0 24 24" 
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path 
+      strokeLinecap="round" 
+      strokeLinejoin="round" 
+      strokeWidth={2} 
+      d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-2.5 5M7 13l2.5 5m0 0h7M9.5 18a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zm7 0a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z" 
+    />
+  </svg>
+);
+
+const cartTotal= cart?.reduce((total,item)=>total +item.quantity,0)||0;
+
   return (
     <header className={`${background? background:'bg-gray-800'} `}>
       <nav >
@@ -22,7 +43,7 @@ const{cookies,Logout}= useAuthProvider()
       
           {cookies.token?  <li><Link onClick={()=>Logout()} to="/login" className="hover:underline">Logout</Link></li>:  <li><Link to="/login" className="hover:underline">Login</Link></li>}
         
-           <li onClick={()=>setIsOpen(true)}><Link to="#" className="hover:underline"><span>&#x1F6D2;</span></Link></li>
+           <li onClick={()=>setIsOpen(true)}><Link to="#" className="hover:underline flex gap-1"><CartIcon className='w-6 h-6'/>  {cartTotal>0 && <span className={``}>{cartTotal}</span>} </Link></li>
           </div>
         </ul>
           
@@ -34,8 +55,12 @@ const{cookies,Logout}= useAuthProvider()
           
           <li><Link to="/" className="hover:underline">Home</Link></li>
           
-          <li><Link to="/login" className="hover:underline">Login</Link></li>
-          <li onClick={()=>setIsOpen(true)}><Link to="#" className="hover:underline"><span>&#x1F6D2;</span></Link></li>
+           {cookies.token?  <li><Link onClick={()=>Logout()} to="/login" className="hover:underline flex gap-1">Logout</Link></li>:  <li><Link to="/login" className="hover:underline">Login</Link></li>}
+          <li onClick={()=>setIsOpen(true)}><Link to="#" className="hover:underline">
+          
+          <CartIcon className='w-6 h-6'/> 
+          {cartTotal>0 && <span>{cartTotal}</span>}
+          </Link></li>
         </ul>)}
        
       </nav>

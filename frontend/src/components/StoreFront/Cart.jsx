@@ -11,7 +11,7 @@ console.log(cart)
   const taxAmount = subtotal * taxRate;
   const totalAmount = subtotal + taxAmount;
   return (
-     <CustomModal modalContainer={`fixed inset-0 flex items-center justify-end bg-opacity-50 `}  modalWrapper={`bg-white h-full  w-[25rem]  shadow-lg relative z-50  transition-transform duration-300  ${isOpen?'translate-x-0 ':'translate-x-full'}
+     <CustomModal modalContainer={`fixed inset-0 flex items-center justify-end bg-opacity-50 `}  modalWrapper={`bg-white h-full  w-[25rem]  shadow-lg relative  transition-transform duration-300  ${isOpen?'translate-x-0 ':'translate-x-full'}
  `} modalButton={``} close={isOpen} onClose={()=>setIsOpen(false)}>
     <div className=' flex flex-col p-4 max-w-[85vw]'>
      

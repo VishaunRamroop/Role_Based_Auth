@@ -31,7 +31,26 @@ function App() {
 
   return (
     <div className='app'>
-      <Toaster position='top-center' reverseOrder={false}/>
+   <Toaster
+        position="bottom-right"
+        toastOptions={{
+          duration: 3000,
+          style: {
+            background: '#363636',
+            color: '#fff',
+          },
+          success: {
+            style: {
+              background: '#4ade80',
+            },
+          },
+          error: {
+            style: {
+              background: '#ef4444',
+            },
+          },
+        }}
+      />
       <Routes>
         <Route path='/' element={<HomePage/>}/>
       <Route element={<AuthLayout/>}>
