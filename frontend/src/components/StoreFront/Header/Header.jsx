@@ -63,7 +63,7 @@ const cartTotal= cart?.reduce((total,item)=>total +item.quantity,0)||0;
         </ul>
           
         
-          <div className="flex items-center justify-between p-1">
+          <div className="flex items-center justify-between p-1 md:hidden">
              
          <div className="flex flex-col items-start justify-start p-4 md:hidden">
             <CustomButton className='md:hidden z-50 text-white ' onClick={()=>setOpen(!open)}><MenuIcon/></CustomButton>
