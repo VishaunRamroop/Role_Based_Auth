@@ -13,18 +13,32 @@ export default function Category() {
 
 };
 const {selectedFilters, setSelectedFilters,setPage} = useProductContext();
-const [isOpenFilter,setIsOpenFilter]= useState(false)
-
+const [isOpenFilter,setIsOpenFilter]= useState(false);
+const FilterIcon = () => (
+  <svg 
+    className="w-4 h-4 mr-2" 
+    fill="none" 
+    stroke="currentColor" 
+    viewBox="0 0 24 24"
+  >
+    <path 
+      strokeLinecap="round" 
+      strokeLinejoin="round" 
+      strokeWidth={2} 
+      d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" 
+    />
+  </svg>
+);
 useEffect(()=>{
 setPage(1)
 },[selectedFilters])
-  return <div className='flex flex-col p-2 items-start justify-start'>
-  <CustomButton className={`md:hidden`} onClick={()=>setIsOpenFilter(!isOpenFilter)}>Filters</CustomButton>
+  return <div className='flex flex-col p-2 items-start justify-start '>
+
   <div className="w-64 hidden p-4 bg-white shadow rounded md:flex flex-col">
   {Object?.entries(filters)?.map(([filterName, options]) => (
    
   <div key={filterName} className="mb-4 ">
-    <h4 className="font-bold mb-2">{filterName}</h4>
+    <h4 className="font-bold mb-2 transition-all duration-200 sm:text-md md:text-lg lg:text-2xl">{filterName}</h4>
 
     {options?.map(option => (
       <label key={option} className="flex items-center mb-1">
@@ -43,7 +57,7 @@ setPage(1)
             });
           }}
         />
-        <span className="ml-2">{option}</span>
+        <span className="ml-2  transition-all duration-200 sm:text-md md:text-lg lg:text-2xl ">{option}</span>
       </label>
     ))}
   </div>
@@ -51,14 +65,14 @@ setPage(1)
 
 
   </div>
-{/* mobile category */}
-    {isOpenFilter &&   <div className=" md:hidden p-4 bg-white shadow rounded flex flex-col">
+  <CustomButton className={`md:hidden mb-2`} onClick={()=>setIsOpenFilter(!isOpenFilter)}><FilterIcon/></CustomButton>
+      <div className={` ${isOpenFilter ? 'flex flex-col items-start justify-center':'hidden'} bg-red-900 w-64 p-4 bg-white shadow rounded `}>
          
   {Object?.entries(filters)?.map(([filterName, options]) => (
    
   <div key={filterName} className="mb-4 ">
-    <h4 className="font-bold mb-2">{filterName}</h4>
-    <h5>MOBILE</h5>
+    <h4 className="font-bold mb-2 sm:text-md md:text-lg lg:text-2xl transition-all duration-200">{filterName}</h4>
+   
     {options?.map(option => (
       <label key={option} className="flex items-center mb-1">
         <input
@@ -76,13 +90,13 @@ setPage(1)
             });
           }}
         />
-        <span className="ml-2">{option}</span>
+        <span className="ml-2 transition-all duration-200">{option}</span>
       </label>
     ))}
   </div>
 ))}
 
-  </div>}
+  </div>
   
   </div>
 }

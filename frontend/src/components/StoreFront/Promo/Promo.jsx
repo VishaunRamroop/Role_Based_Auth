@@ -1,21 +1,13 @@
 
 
 export default function Promo() {
-
-
-
-
-
-  return (<div className='flex flex-col items-center justify-center bg-gray-100 p-4 w-full min-h-[50vh]'> 
-              <img
-              loading='eager'
-                width={300}
-                height={200}
-                alt="Deals Promos"
-                className=" object-cover rounded-lg bg-gray-100"
-
-                src="/percent.webp"
-              />
-                  </div>
-                )
+  return (
+    <div className='bg-gradient-to-r from-blue-600 via-indigo-200 to-purple-700 text-white py-12 animate-pulse'>
+      <div className='container mx-auto px-4 text-center'>
+        <h1 className= ' sm:text-md md:text-lg lg:text-4xl font-bold mb-4'>Welcome to CloudCart</h1>
+        <p className='sm:text-md md:text-lg lg:text-xl mb-6'>Discover amazing products at unbeatable prices</p>
+       
+      </div>
+    </div>
+  );
 }

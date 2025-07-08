@@ -23,7 +23,7 @@ getProducts(page,createAt,sortOrder,categoryFilters);
     <div className='flex z-50  bg-white w-full p-4 '>
      <Category/>
       <main className="flex flex-col flex-1 p-4 rounded shadow ">
-        <h1 className='text-2xl font-bold mb-4'>Products</h1>
+        <h1 className='sm:text-md md:text-lg lg:text-2xl font-bold mb-4'>Products</h1>
         <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 min-h-screen '>
           {/* Example product cards */}
           {products?.map((product, index) => (
@@ -36,8 +36,8 @@ getProducts(page,createAt,sortOrder,categoryFilters);
   loading="lazy"
   className="w-full h-40 object-contain mb-2 rounded-lg"
 />
-              <h2 className='text-lg font-semibold'>{product.name}</h2>
-              <p className='text-gray-600'> ${product.price}</p>
+              <h2 className='sm:text-md md:text-lg lg:text-2xl font-semibold'>{product.name}</h2>
+              <p className='text-gray-600 sm:text-md md:text-lg lg:text-2xl'> ${product.price}</p>
               <CustomButton className='mt-2 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600'
               onClick={()=>{add(product);toast.success(`${product.name} added to cart!`)}}>
                 Add to Cart

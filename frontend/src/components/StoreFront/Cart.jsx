@@ -17,16 +17,16 @@ console.log(cart)
      
       {cart.length >0 ? cart?.map((item,index)=>{
     return    <div className= {`w-100 flex items-center justify-between gap-4 p-4 outline-solid outline-1 outline-gray-200 rounded-lg transition-all duration-200 hover:bg-gray-300`} key={item.name}>
-      <img src={item.url} alt="" className="w-20 h-20 rounded-lg" />
-      <p className='text-lg font-semibold w-10'>{item.name} x:{item.quantity}</p>
-      <p className=' text-xl font-semibold'>${item.price}</p>
+      <img src={item.url} alt={item.name} className="w-20 h-20 rounded-lg" />
+      <p className='sm:text-md md:text-lg font-semibold w-10'>{item.name} x:{item.quantity}</p>
+      <p className='sm:text-md md:text-lg lg:text-2xl font-semibold'>${item.price}</p>
       <CustomButton className={`bg-blue-500 p-2 rounded-lg text-white font-semibold transition-all duration-200 active:bg-blue-900 font-black`} onClick={()=>{add(item)}}>Add</CustomButton>
       <CustomButton className={`bg-red-500 p-2 rounded-lg text-white font-semibold transition-all duration-200 active:bg-red-900 font-black`} onClick={()=>{minus(item)}}>Minus</CustomButton>
     
     </div>
       }):<div className="text-center py-8">
-              <p className="text-gray-500 text-lg">Your cart is empty</p>
-              <p className="text-gray-400 text-sm mt-2">Add some products to get started!</p>
+              <p className="text-gray-500 sm:text-md md:text-lg lg:Text-2xl">Your cart is empty</p>
+              <p className="text-gray-400 sm:text-md md:text-lg lg:Text-2xl mt-2">Add some products to get started!</p>
             </div>}
   {cart.length > 0 && (
           <div className="border-t border-gray-200 p-4 space-y-3">
@@ -35,7 +35,7 @@ console.log(cart)
               <span>${subtotal.toFixed(2)}</span>
             </div>
             
-            <div className="flex justify-between text-sm">
+            <div className="flex justify-between sm:text-sm md:text-lg lg:text-2xl">
               <span>Tax ({(taxRate * 100).toFixed(0)}%):</span>
               <span>${taxAmount.toFixed(2)}</span>
             </div>
@@ -45,7 +45,7 @@ console.log(cart)
               <span>${totalAmount.toFixed(2)}</span>
             </div>
 
-            <CustomButton className="w-full bg-green-600 text-white py-3 rounded-lg font-semibold hover:bg-green-700 transition-colors mt-4">
+            <CustomButton className="w-full bg-green-600 text-white py-3 rounded-lg font-semibold hover:bg-green-700 transition-colors mt-4 sm:text-md md:text-lg lg:text-2xl">
               Proceed to Checkout
             </CustomButton>
           </div>
