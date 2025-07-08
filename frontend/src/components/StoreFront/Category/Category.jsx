@@ -66,7 +66,7 @@ setPage(1)
 
   </div>
   <CustomButton className={`md:hidden mb-2`} onClick={()=>setIsOpenFilter(!isOpenFilter)}><FilterIcon/></CustomButton>
-      <div className={`transform, transition-all duration-200 ${isOpenFilter ? 'flex flex-col items-start justify-center translate-x-0  opacity-100':'-translate-x-full opacity-0 fixed '}  p-4 bg-white shadow rounded `}>
+      <div className={`transform, transition-all duration-200 ${isOpenFilter ? 'flex flex-col items-start md:hidden justify-center translate-x-0  opacity-100':'-translate-x-full opacity-0 fixed '}  p-4 bg-white shadow rounded `}>
          
   {Object?.entries(filters)?.map(([filterName, options]) => (
    
