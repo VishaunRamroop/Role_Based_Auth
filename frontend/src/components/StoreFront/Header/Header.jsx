@@ -63,24 +63,27 @@ const cartTotal= cart?.reduce((total,item)=>total +item.quantity,0)||0;
         </ul>
           
         
-         
+          <div className="flex items-center justify-between p-1">
+             
          <div className="flex flex-col items-start justify-start p-4 md:hidden">
             <CustomButton className='md:hidden z-50 text-white ' onClick={()=>setOpen(!open)}><MenuIcon/></CustomButton>
-         <ul className={`transform transition-all duration-200 ease-in-out text-white  ${open?'opacity-100 translate-y-0':'-translate-y-full opacity-0 fixed'}`}>
+         <ul className={` transform transition-all duration-200 ease-in-out text-white  ${open?'opacity-100 translate-y-0':'-translate-y-full opacity-0 fixed'}`}>
             
               <li className='text-lg w-fit sm:text-md md:text-lg lg:text-2xl hover:underline'><span> Store Front </span></li>
           
           <li><Link to="/" className="hover:underline w-fit sm:text-md md:text-lg lg:text-2xl " >Home</Link></li>
           
            {cookies.token?  <li><Link onClick={()=>Logout()} to="/login" className="hover:underline flex gap-1 w-fit sm:text-md md:text-lg lg:text-2xl ">Logout</Link></li>:  <li><Link to="/login" className="hover:underline w-fit sm:text-md md:text-lg lg:text-2xl ">Login</Link></li>}
-          <CustomButton onClick={()=>setIsOpen(true)}><Link to="#" className="hover:underline sm:text-md md:text-lg lg:text-2xl ">
+   
+        </ul>
+       
+         </div>
+               <CustomButton onClick={()=>setIsOpen(true)}><Link to="#" className="hover:underline sm:text-md md:text-lg lg:text-2xl text-white ">
           
           
           {cartTotal>0 && <span>{cartTotal}</span>}
-          </Link><CartIcon className='w-6 h-6 hover:animate-pulse'/> </CustomButton>
-        </ul>
-         </div>
-       
+          </Link><CartIcon className='w-6 h-6 hover:animate-pulse text-white'/> </CustomButton>
+          </div>
       </nav>
     </header>
   )
