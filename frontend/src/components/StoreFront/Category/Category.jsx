@@ -16,7 +16,7 @@ const {selectedFilters, setSelectedFilters,setPage} = useProductContext();
 const [isOpenFilter,setIsOpenFilter]= useState(false);
 const FilterIcon = () => (
   <svg 
-    className="w-4 h-4 mr-2" 
+    className="w-10 h-10  text-sky-900 rounded-full p-1 mr-2 animate-bounce" 
     fill="none" 
     stroke="currentColor" 
     viewBox="0 0 24 24"
@@ -66,7 +66,7 @@ setPage(1)
 
   </div>
   <CustomButton className={`md:hidden mb-2`} onClick={()=>setIsOpenFilter(!isOpenFilter)}><FilterIcon/></CustomButton>
-      <div className={` ${isOpenFilter ? 'flex flex-col items-start justify-center':'hidden'} bg-red-900 w-64 p-4 bg-white shadow rounded `}>
+      <div className={`transform, transition-all duration-200 ${isOpenFilter ? 'flex flex-col items-start justify-center translate-x-0  opacity-100':'-translate-x-full opacity-0 fixed '}  p-4 bg-white shadow rounded `}>
          
   {Object?.entries(filters)?.map(([filterName, options]) => (
    
