@@ -27,7 +27,7 @@ getProducts(page,createAt,sortOrder,categoryFilters);
         <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 min-h-screen '>
           {/* Example product cards */}
           {products?.map((product, index) => (
-            <div key={index} className='bg-white p-4 rounded shadow hover:shadow-lg h-fit transition-shadow sm:min-w-0'>
+            <div key={index} className=' flex flex-col items-center justify-center bg-white p-4 rounded shadow hover:shadow-lg h-fit transition-shadow sm:min-w-0'>
              <img
   src={product.url}
  
@@ -38,7 +38,7 @@ getProducts(page,createAt,sortOrder,categoryFilters);
 />
               <h2 className='sm:text-md md:text-lg lg:text-2xl font-semibold'>{product.name}</h2>
               <p className='text-gray-600 sm:text-md md:text-lg lg:text-2xl'> ${product.price}</p>
-              <CustomButton className='mt-2 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600'
+              <CustomButton className='sm:text-md md:text-lg lg:text-xl mt-2 bg-blue-500 text-white font-bold px-4 py-2 transition-all duration-200 rounded hover:bg-blue-600'
               onClick={()=>{add(product);toast.success(`${product.name} added to cart!`)}}>
                 Add to Cart
               </CustomButton>
