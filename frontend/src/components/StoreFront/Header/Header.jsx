@@ -53,7 +53,7 @@ const cartTotal= cart?.reduce((total,item)=>total +item.quantity,0)||0;
         
      
            <div className="hidden md:flex md:items-center md:justify-between w-full">
-             <li className='text-lg w-fit sm:text-md md:text-lg lg:text-2xl hover:underline'><a href='/'> Store Front </a></li>
+             <li className='text-lg w-fit sm:text-md md:text-lg lg:text-2xl hover:underline'><Link to="/" className="hover:underline w-fit sm:text-md md:text-lg lg:text-2xl ">Home</Link></li>
           <li><Link to="/" className="hover:underline w-fit sm:text-md md:text-lg lg:text-2xl ">Home</Link></li>
       
           {cookies.token?  <li><Link onClick={()=>Logout()} to="/login" className="hover:underline w-fit sm:text-md md:text-lg lg:text-2xl ">Logout</Link></li>:  <li><Link to="/login" className="hover:underline w-fit sm:text-md md:text-lg lg:text-2xl ">Login</Link></li>}

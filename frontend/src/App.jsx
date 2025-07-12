@@ -37,11 +37,11 @@ function App() {
           duration: 3000,
           style: {
             background: '#363636',
-            color: '#fff',
+            color: 'white',
           },
           success: {
             style: {
-              background: '#4ade80',
+              background: 'black',
             },
           },
           error: {
