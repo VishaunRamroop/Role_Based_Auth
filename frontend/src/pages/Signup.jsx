@@ -35,8 +35,8 @@ export default function Signup() {
         <CustomInput type={'email'} icon={Mail} placeholder={'Enter your email.'} value={email} onChange={(e)=>{setEmail(e.target.value)}} className={inputStyles}/>
           
         <CustomInput type={'password'} icon={Lock} placeholder={'Enter your password.'} value={password} onChange={(e)=>{setPassword(e.target.value)}} className={inputStyles}/>
-        <CustomButton type={'submit'} className={signupButtonStyles} icon={SendHorizonal} disabled={loading}>Signup</CustomButton>
-        <p className='font-bold text-lg'>Already have an Account?<Link to={'/login'}><span className='text-gray-900 font-bold'>Login</span></Link></p>
+        <CustomButton type={'submit'} className={`${signupButtonStyles} sm:text-lg md:text-xl lg:text-2xl font-bold transition-all duration-200 hover:bg-emerald-500`} icon={SendHorizonal} disabled={loading}>Signup</CustomButton>
+        <p className='font-bold sm:text-lg md:text-xl lg:text-2xl font-bold transition-all duration-200 '>Already have an Account?<Link to={'/login'}><span className='sm:text-lg md:text-xl lg:text-2xl text-blue-900 font-bold transition-all duration-200 font-bold ml-2'>Login</span></Link></p>
          {err  && <p className='text-red-500 font-bold text-lg'>{err}</p>}
       </CustomForm>
       <Cart/>
